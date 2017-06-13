@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!---->
+
+    <br>
+    <div class="row center-xs center-md center-lg">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Portofolio</h2>
+          <br>
+            <div class="row center-xs center-md center-lg">
+              {% for obj in object_list %}
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">{{ obj.title }}</h2>
+                    <p class="lead">{{ obj.content }}</p>
+                </div>
+                <div class="col-md-6">
+                {% if obj.image %}
+                    <img class="img-responsive" src="{{ obj.image.url }}" alt="">
+                {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    <div class="pagination">
+      <span class="step-links">
+          {% if object_list.has_previous %}
+              <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+          </span>
+
+          {% if object_list.has_next %}
+              <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+          {% endif %}
+      </span>
+  	</div>
+
+
+{% endblock content %}

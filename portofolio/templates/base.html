@@ -1,0 +1,173 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+    {% block style %}
+    {% endblock style %}
+    </style>
+    <link rel="stylesheet" href="{% static 'css/flexboxgrid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}" />
+
+    <title>{% block head_title %}portofolio{% endblock %}</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header id="main-header">
+     <div class="container">
+      <div class="row end-sm end-md end-lg center-xs middle-xs middle-sm middle-md middle-lg">
+       <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+       	<h1><span class="primary-text">Hando</span>Folio</h1>
+       </div>
+       <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+       	<nav id="navbar">
+    	   <ul>
+    		   <li class="current"><a href="">Home</a></li>
+    		   <li><a href="">About</a></li>
+    		   <li><a href="">Services</a></li>
+    		   <li><a href="">Contact</a></li>
+    	   </ul>
+       	</nav>
+       </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- showcase -->
+    <section id="showcase">
+     <div class="container">
+      <div class="row center-xs center-sm center-md center-lg midle-xs midle-sm midle-md midle-lg">
+       <div class="col-xs-10 col-sm-10 col-md-9 col-lg-7 showcase-content">
+       	<h1>Welcome to <span class="primary-text">My Portofolio</span></h1>
+       	 <p>A template built with html5, CSS3 and flexboxgrid</p>
+       	</div>
+      </div>
+     </div>
+    </section>
+
+    <!-- features -->
+    <section id="features">
+      <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+      </div>
+    </section>
+
+
+    <!-- info section -->
+    <section id="info">
+    	<div class="container">
+    		<div class="row center-xs center-sm center-md center-lg middle-xs middle-sm middle-md middle-lg">
+    			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    				<img src="images/iphone.jpg" alt="">
+    			</div>
+    			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    				<h2>Core Features</h2>
+    				<ul>
+    					<li><i class="fa fa-check"></i> Fully Optimized</li>
+    					<li><i class="fa fa-check"></i> Free Support</li>
+    					<li><i class="fa fa-check"></i> Free Upgrade</li>
+    					<li><i class="fa fa-check"></i> Uptime Guarantee</li>
+    					<li><i class="fa fa-check"></i> Multiple User/li>
+    					<li><i class="fa fa-check"></i> Plug & Play</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+
+    <!-- company -->
+    <section id="company">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    				<h4>Contact Us</h4>
+    				<ul>
+    					<li><i class="fa fa-phone"></i> (+62-821) 555-555</li>
+    					<li><i class="fa fa-envelope"></i> support@mail.com</li>
+    					<li><i class="fa fa-map"></i> 400 main st, Bumiayu</li>
+    				</ul>
+    			</div>
+    			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    				<h4>About Us</h4>
+    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    			</div>
+    			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    				<h4>Newsletter</h4>
+    				<p>Lorem ipsum dolor sit amet</p>
+    				<form>
+    					<input type="text" name="email" value="" placeholder="Enter Email">
+    					<button type="submit" name="button">Submit</button>
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <!-- footer -->
+    <footer id="main-footer">
+    	<div class="container">
+    		<div class="row center-xs center-sm center-md center-lg">
+    			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    				<p>Copyright &copy; 2017 | AppTheme</p>
+    			</div>
+    		</div>
+    	</div>
+    </footer>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+
+<!-- script js untuk membuat markdown -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".content-markdown").each(function(){
+          var content = $(this).text()
+          var markedContent = marked(content)
+          $(this).html(markedContent)
+        })
+      $(".post-detail-item img").each(function(){
+          $(this).addClass("img-responsive");
+        })
+
+      // preview-title
+      var titleInput = $("#id_title");
+
+      function setTitle(value) {
+        $("#preview-title").text(value)
+      }
+      setTitle(titleInput.val())
+
+      titleInput.keyup(function(){
+        var newContent = $(this).val()
+        setTitle(newContent)
+      })
+
+
+      // $("#preview-content").html(marked(contentItem.val()))
+      var contentInput = $("#id_content");
+
+      function setContent(value){
+        var markedContent = marked(value)
+        $("#preview-content").html(markedContent)
+        $("#preview-content img").each(function(){
+          $(this).addClass("img-responsive")
+        })
+      }
+      setContent(contentInput.val())
+
+      contentInput.keyup(function(){
+        var newContent = $(this).val()
+        setContent(newContent)
+      })
+
+  })
+  </script>
+
+  
+  </body>
+</html>
